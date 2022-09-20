@@ -1,0 +1,80 @@
+$chart-size: 800px;
+$dash-size: 1.41501;
+$normalized-dash-size: $dash-size * $chart-size;
+.chart-container {
+  position: relative;
+  width: $chart-size;
+  height: $chart-size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(240, 240, 240);
+}
+
+.chart {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.percentage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  svg {
+    transform: rotateY(180deg);
+    width: 100%;
+    height: 100%;
+    circle {
+      width: 100%;
+      height: 100%;
+      cx: 50%;
+      cy: 50%;
+      r: 45%;
+      fill: transparent;
+      stroke-width: 1.25%;
+      stroke: #e6e6f4;
+      stroke-linecap: round;
+    }
+    circle:nth-child(1) {
+      stroke-dasharray: $normalized-dash-size;
+      stroke-dashoffset: $normalized-dash-size;
+    }
+
+    circle:nth-child(2) {
+      stroke-width: 2%;
+      stroke: #0ad17d;
+      $value: 70;
+      stroke-dasharray: calc(
+        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value}) / 100
+      );
+      stroke-dashoffset: calc(
+        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value}) / 100
+      );
+    }
+
+    circle:nth-child(3) {
+      stroke-width: 2%;
+      stroke: #ffac4a;
+      $value: 40;
+      stroke-dasharray: calc(
+        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value}) / 100
+      );
+      stroke-dashoffset: calc(
+        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value}) / 100
+      );
+    }
+
+    circle:nth-child(4) {
+      stroke-width: 2%;
+      stroke: #ff6b6b;
+      $value: 20;
+      stroke-dasharray: calc(
+        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value}) / 100
+      );
+      stroke-dashoffset: calc(
+        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value}) / 100
+      );
+    }
+  }
+}
