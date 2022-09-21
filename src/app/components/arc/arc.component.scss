@@ -236,11 +236,14 @@ $dot-init-y: 48%;
     .box-number {
       font-size: 14px;
       font-weight: 700;
+      line-height: 120%;
     }
 
     .box-unit {
       font-weight: 400;
       font-size: 13px;
+
+      margin-bottom: 8px;
     }
 
     .box-1 {
