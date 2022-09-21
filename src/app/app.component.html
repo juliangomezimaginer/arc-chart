@@ -33,5 +33,11 @@
 </div>
 
 <div class="container-charts">
-  <app-arc></app-arc>
+  <app-arc
+    [critical]="formModel.critical"
+    [low]="formModel.low"
+    [full]="formModel.full"
+    [current]="formModel.value"
+    [unit]="formModel.unit"
+  ></app-arc>
 </div>
