@@ -9,6 +9,8 @@ $value-2: 30;
 $dot-value-2: 20;
 $value-3: 20;
 
+$stoke-width: 3%;
+
 $dot-size: 2;
 $dash-size: 1.41501;
 $normalized-dash-size: $dash-size * $chart-size;
@@ -117,7 +119,7 @@ $dot-init-y: 48%;
       cy: 50%;
       r: 45%;
       fill: transparent;
-      stroke-width: 1.5%;
+      stroke-width: calc(#{$stoke-width} / 2);
       stroke: #e6e6f4;
       stroke-linecap: round;
     }
@@ -127,7 +129,7 @@ $dot-init-y: 48%;
     }
 
     circle:nth-child(2) {
-      stroke-width: 3%;
+      stroke-width: $stoke-width;
       stroke: #0ad17d;
       stroke-dasharray: calc(
         2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value-1}) /
@@ -140,7 +142,7 @@ $dot-init-y: 48%;
     }
 
     circle:nth-child(3) {
-      stroke-width: 3%;
+      stroke-width: calc(#{$stoke-width} * 1.08);
       stroke: #ffac4a;
       stroke-dasharray: calc(
         2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value-2}) /
@@ -153,7 +155,7 @@ $dot-init-y: 48%;
     }
 
     circle:nth-child(4) {
-      stroke-width: 3%;
+      stroke-width: calc(#{$stoke-width} * 1.08);
       stroke: #ff6b6b;
       stroke-dasharray: calc(
         2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value-3}) /
