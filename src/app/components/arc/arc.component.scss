@@ -1,14 +1,13 @@
 @use "sass:math";
+:host {
+  --full-value: 100;
+  --low-value: 30;
+  --critical-value: 20;
+  --low-dot-value: 30;
+  --critical-dot-value: 20;
+}
 
 $chart-size: 320px;
-$value-1: 100;
-
-$dot-value-1: 30;
-$value-2: 30;
-
-$dot-value-2: 20;
-$value-3: 20;
-
 $stoke-width: 3%;
 
 $dot-size: 2;
@@ -55,16 +54,16 @@ $dot-init-y: 48%;
 }
 
 .dot-text-1 {
-  transform: rotate(calc(180deg * #{$dot-value-1}/ 100));
+  transform: rotate(calc(180deg * var(--low-dot-value) / 100));
   span span {
-    transform: rotate(calc(-1 * 180deg * #{$dot-value-1}/ 100));
+    transform: rotate(calc(-1 * 180deg * var(--low-dot-value) / 100));
   }
 }
 
 .dot-text-2 {
-  transform: rotate(calc(180deg * #{$dot-value-2}/ 100));
+  transform: rotate(calc(180deg * var(--critical-dot-value) / 100));
   span span {
-    transform: rotate(calc(-1 * 180deg * #{$dot-value-2}/ 100));
+    transform: rotate(calc(-1 * 180deg * var(--critical-dot-value) / 100));
   }
 }
 
@@ -89,14 +88,14 @@ $dot-init-y: 48%;
 }
 
 .dot-1 {
-  transform: rotate(calc(180deg * #{$dot-value-1}/ 100));
+  transform: rotate(calc(180deg * var(--low-dot-value) / 100));
   &::before {
     background-color: #ffac4a;
   }
 }
 
 .dot-2 {
-  transform: rotate(calc(180deg * #{$dot-value-2}/ 100));
+  transform: rotate(calc(180deg * var(--critical-dot-value) / 100));
   &::before {
     background-color: #ff6b6b;
   }
@@ -132,12 +131,14 @@ $dot-init-y: 48%;
       stroke-width: $stoke-width;
       stroke: #0ad17d;
       stroke-dasharray: calc(
-        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value-1}) /
-          100
+        2 * #{$normalized-dash-size} - (
+            #{$normalized-dash-size} * var(--full-value)
+          ) / 100
       );
       stroke-dashoffset: calc(
-        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value-1}) /
-          100
+        2 * #{$normalized-dash-size} - (
+            #{$normalized-dash-size} * var(--full-value)
+          ) / 100
       );
     }
 
@@ -145,12 +146,14 @@ $dot-init-y: 48%;
       stroke-width: calc(#{$stoke-width} * 1.08);
       stroke: #ffac4a;
       stroke-dasharray: calc(
-        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value-2}) /
-          100
+        2 * #{$normalized-dash-size} - (
+            #{$normalized-dash-size} * var(--low-value)
+          ) / 100
       );
       stroke-dashoffset: calc(
-        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value-2}) /
-          100
+        2 * #{$normalized-dash-size} - (
+            #{$normalized-dash-size} * var(--low-value)
+          ) / 100
       );
     }
 
@@ -158,12 +161,14 @@ $dot-init-y: 48%;
       stroke-width: calc(#{$stoke-width} * 1.08);
       stroke: #ff6b6b;
       stroke-dasharray: calc(
-        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value-3}) /
-          100
+        2 * #{$normalized-dash-size} - (
+            #{$normalized-dash-size} * var(--critical-value)
+          ) / 100
       );
       stroke-dashoffset: calc(
-        2 * #{$normalized-dash-size} - (#{$normalized-dash-size}* #{$value-3}) /
-          100
+        2 * #{$normalized-dash-size} - (
+            #{$normalized-dash-size} * var(--critical-value)
+          ) / 100
       );
     }
   }
