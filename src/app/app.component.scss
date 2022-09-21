@@ -6,4 +6,16 @@
   flex-wrap: wrap;
   gap: 40px;
   outline: 1px solid black;
+  margin: 10px auto;
+}
+
+.inputs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  .field {
+    text-align: center;
+    font-weight: 500;
+  }
 }
