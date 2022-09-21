@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-arc',
@@ -6,19 +6,14 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./arc.component.scss'],
 })
 export class ArcComponent implements OnInit {
-  @Input() critical: number = 10;
-  @Input() low: number = 15;
+  @Input() critical: number = 5;
+  @Input() low: number = 30;
   @Input() full: number = 50;
   @Input() current: number = 50;
   @Input() unit: string = 'cans';
 
-  circleFull = 0;
-  circleLow = 0;
-  circleCritical = 0;
-
   private _lastCriticalPercentage = 0;
   private _lastLowPercentage = 0;
-  private _lastFullPercentage = 0;
   private _lastCurrentPercentage = 0;
 
   get criticalDotPercentage(): string {
@@ -33,7 +28,7 @@ export class ArcComponent implements OnInit {
     return `${Math.round(this.updateCurrentPercentage()).toLocaleString()}%`;
   }
 
-  constructor() {}
+  constructor(private _host: ElementRef<HTMLElement>) {}
 
   ngOnInit(): void {}
 
@@ -41,21 +36,44 @@ export class ArcComponent implements OnInit {
     const critical = this._lastCriticalPercentage;
     const low = this._lastLowPercentage;
     const current = this._lastCurrentPercentage;
+    let circleFull = 0;
+    let circleLow = 0;
+    let circleCritical = 0;
     if (current < critical) {
-      this.circleFull = 0;
-      this.circleLow = 0;
-      this.circleCritical = Math.round(current);
+      circleFull = 0;
+      circleLow = 0;
+      circleCritical = Math.round(current);
     } else if (critical <= current && current < low) {
-      this.circleFull = 0;
-      this.circleLow = Math.round(current);
-      this.circleCritical = Math.round(critical);
+      circleFull = 0;
+      circleLow = Math.round(current);
+      circleCritical = Math.round(critical);
     } else {
-      this.circleFull = Math.round(current);
-      this.circleLow = Math.round(low);
-      this.circleCritical = Math.round(critical);
+      circleFull = Math.round(current);
+      circleLow = Math.round(low);
+      circleCritical = Math.round(critical);
     }
     const criticalDot = Math.round(critical);
     const lowDot = Math.round(low);
+    this._host.nativeElement.style.setProperty(
+      '--full-value',
+      circleFull.toLocaleString()
+    );
+    this._host.nativeElement.style.setProperty(
+      '--low-value',
+      circleLow.toLocaleString()
+    );
+    this._host.nativeElement.style.setProperty(
+      '--critical-value',
+      circleCritical.toLocaleString()
+    );
+    this._host.nativeElement.style.setProperty(
+      '--critical-dot-value',
+      criticalDot.toLocaleString()
+    );
+    this._host.nativeElement.style.setProperty(
+      '--low-dot-value',
+      lowDot.toLocaleString()
+    );
   }
 
   updateCurrentPercentage(): number {
