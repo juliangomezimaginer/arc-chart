@@ -1,13 +1,13 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 
 @Component({
   selector: 'app-arc',
   templateUrl: './arc.component.html',
   styleUrls: ['./arc.component.scss'],
 })
-export class ArcComponent implements OnInit {
-  @Input() critical: number = 5;
-  @Input() low: number = 30;
+export class ArcComponent {
+  @Input() critical: number = 10;
+  @Input() low: number = 15;
   @Input() full: number = 50;
   @Input() current: number = 50;
   @Input() unit: string = 'cans';
@@ -29,8 +29,6 @@ export class ArcComponent implements OnInit {
   }
 
   constructor(private _host: ElementRef<HTMLElement>) {}
-
-  ngOnInit(): void {}
 
   updateChart(): void {
     const critical = this._lastCriticalPercentage;
