@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { STATUS } from '../constants/status.constant';
 
 @Component({
@@ -6,7 +13,7 @@ import { STATUS } from '../constants/status.constant';
   templateUrl: './arc.component.html',
   styleUrls: ['./arc.component.scss'],
 })
-export class ArcComponent implements OnInit {
+export class ArcComponent implements OnInit, OnChanges {
   @Input() critical: number = 10;
   @Input() low: number = 15;
   @Input() full: number = 50;
@@ -31,7 +38,10 @@ export class ArcComponent implements OnInit {
     return `${Math.round(this.updateCurrentPercentage()).toLocaleString()}%`;
   }
 
-  constructor(private _host: ElementRef<HTMLElement>) {}
+  constructor(
+    private _host: ElementRef<HTMLElement>,
+    private _cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     // setTimeout(() => {
@@ -46,21 +56,26 @@ export class ArcComponent implements OnInit {
     //     }
     //   }, 200);
     // }, 2000);
+    this.updateChart();
+  }
+
+  ngOnChanges(): void {
+    this.updateChart();
   }
 
   updateChart(): void {
-    const critical = this._lastCriticalPercentage;
-    const low = this._lastLowPercentage;
-    const current = this._lastCurrentPercentage;
+    const critical = this.updateCriticalPercentage();
+    const low = this.updateLowPercentage();
+    const current = this.updateCurrentPercentage();
     let circleFull = 0;
     let circleLow = 0;
     let circleCritical = 0;
-    if (current < critical) {
+    if (current <= critical) {
       circleFull = 0;
       circleLow = 0;
       circleCritical = Math.round(current);
       this.currentStatus = STATUS.CRITICAL;
-    } else if (critical <= current && current < low) {
+    } else if (critical < current && current <= low) {
       circleFull = 0;
       circleLow = Math.round(current);
       circleCritical = Math.round(critical);
@@ -93,6 +108,7 @@ export class ArcComponent implements OnInit {
       '--low-dot-value',
       lowDot.toLocaleString()
     );
+    this._cdRef.detectChanges();
   }
 
   updateCurrentPercentage(): number {
@@ -103,7 +119,6 @@ export class ArcComponent implements OnInit {
     if (value > 100) value = 100;
     if (value < 0) value = 0;
     this._lastCurrentPercentage = value;
-    this.updateChart();
     return value;
   }
 
@@ -115,7 +130,6 @@ export class ArcComponent implements OnInit {
     if (value > 100) value = 100;
     if (value < 0) value = 0;
     this._lastCriticalPercentage = value;
-    this.updateChart();
     return value;
   }
 
@@ -127,7 +141,6 @@ export class ArcComponent implements OnInit {
     if (value > 100) value = 100;
     if (value < 0) value = 0;
     this._lastLowPercentage = value;
-    this.updateChart();
     return value;
   }
 }
