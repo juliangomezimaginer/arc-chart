@@ -1,3 +1,37 @@
+<h4>INPUTS</h4>
+<div class="inputs">
+  <div class="field">
+    <label style="display: block" for="unit">Unit</label>
+    <input type="text" id="unit" name="unit" [(ngModel)]="formModel.unit" />
+  </div>
+  <div class="field">
+    <label style="display: block" for="value">Value</label>
+    <input
+      type="number"
+      id="value"
+      name="value"
+      [(ngModel)]="formModel.value"
+    />
+  </div>
+  <div class="field">
+    <label style="display: block" for="critical">Critical level</label>
+    <input
+      type="number"
+      id="critical"
+      name="critical"
+      [(ngModel)]="formModel.critical"
+    />
+  </div>
+  <div class="field">
+    <label style="display: block" for="low">Low Level</label>
+    <input type="number" id="low" name="low" [(ngModel)]="formModel.low" />
+  </div>
+  <div class="field">
+    <label style="display: block" for="full">Full Level</label>
+    <input type="number" id="full" name="full" [(ngModel)]="formModel.full" />
+  </div>
+</div>
+
 <div class="container-charts">
-  <app-arc></app-arc>
+  <app-arc []></app-arc>
 </div>
