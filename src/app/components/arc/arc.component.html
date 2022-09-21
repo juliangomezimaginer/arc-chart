@@ -4,12 +4,12 @@
       <div class="dot dot-1"></div>
       <div class="dot-text dot-text-1">
         <span
-          ><span>{{ lowDotValue }}</span></span
+          ><span>{{ lowDotPercentage }}</span></span
         >
       </div>
       <div class="dot-text dot-text-2">
         <span
-          ><span>{{ criticalDotValue }}</span></span
+          ><span>{{ criticalDotPercentage }}</span></span
         >
       </div>
       <div class="dot dot-2"></div>
@@ -22,22 +22,22 @@
       <div class="text-0">0%</div>
       <div class="text-100">100%</div>
       <div class="main-texts">
-        <div class="main-text-1">100%</div>
-        <div class="main-text-2">50 cans</div>
+        <div class="main-text-1">{{ currentChartValue }}</div>
+        <div class="main-text-2">{{ current }} {{ unit }}</div>
         <div class="main-text-3">on hand</div>
       </div>
       <div class="boxes">
         <div class="box box-1">
-          <div class="box-number">10</div>
-          <div class="box-unit">cans</div>
+          <div class="box-number">{{ critical }}</div>
+          <div class="box-unit">{{ unit }}</div>
         </div>
         <div class="box box-2">
-          <div class="box-number">15</div>
-          <div class="box-unit">cans</div>
+          <div class="box-number">{{ low }}</div>
+          <div class="box-unit">{{ unit }}</div>
         </div>
         <div class="box box-3">
-          <div class="box-number">50</div>
-          <div class="box-unit">cans</div>
+          <div class="box-number">{{ full }}</div>
+          <div class="box-unit">{{ unit }}</div>
         </div>
       </div>
     </div>
