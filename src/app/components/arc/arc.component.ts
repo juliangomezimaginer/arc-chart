@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { STATUS } from '../constants/status.constant';
 
 @Component({
   selector: 'app-arc',
@@ -11,10 +12,12 @@ export class ArcComponent implements OnInit {
   @Input() full: number = 50;
   @Input() current: number = 50;
   @Input() unit: string = 'cans';
-
+  readonly status: typeof STATUS = STATUS;
   private _lastCriticalPercentage = 0;
   private _lastLowPercentage = 0;
   private _lastCurrentPercentage = 0;
+
+  currentStatus = STATUS.CRITICAL;
 
   get criticalDotPercentage(): string {
     return `${Math.round(this.updateCriticalPercentage()).toLocaleString()}%`;
@@ -56,14 +59,17 @@ export class ArcComponent implements OnInit {
       circleFull = 0;
       circleLow = 0;
       circleCritical = Math.round(current);
+      this.currentStatus = STATUS.CRITICAL;
     } else if (critical <= current && current < low) {
       circleFull = 0;
       circleLow = Math.round(current);
       circleCritical = Math.round(critical);
+      this.currentStatus = STATUS.LOW;
     } else {
       circleFull = Math.round(current);
       circleLow = Math.round(low);
       circleCritical = Math.round(critical);
+      this.currentStatus = STATUS.FULL;
     }
     const criticalDot = Math.round(critical);
     const lowDot = Math.round(low);

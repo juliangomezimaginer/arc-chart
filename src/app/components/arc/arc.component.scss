@@ -198,7 +198,6 @@ $dot-init-y: 48%;
       &-1 {
         font-weight: 700;
         font-size: 21px;
-        color: #0ad17d;
       }
       &-2 {
         font-weight: 500;
@@ -283,4 +282,16 @@ $dot-init-y: 48%;
       }
     }
   }
+}
+
+.color-critical {
+  color: #ff6b6b;
+}
+
+.color-low {
+  color: #ffac4a;
+}
+
+.color-full {
+  color: #0ad17d;
 }

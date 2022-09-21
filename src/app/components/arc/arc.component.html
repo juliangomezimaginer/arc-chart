@@ -22,7 +22,16 @@
       <div class="text-0">0%</div>
       <div class="text-100">100%</div>
       <div class="main-texts">
-        <div class="main-text-1">{{ currentChartValue }}</div>
+        <div
+          class="main-text-1"
+          [ngClass]="{
+            'color-critical': currentStatus === status.CRITICAL,
+            'color-low': currentStatus === status.LOW,
+            'color-full': currentStatus === status.FULL
+          }"
+        >
+          {{ currentChartValue }}
+        </div>
         <div class="main-text-2">{{ current }} {{ unit }}</div>
         <div class="main-text-3">on hand</div>
       </div>
