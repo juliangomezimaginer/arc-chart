@@ -20,9 +20,6 @@ export class ArcComponent implements OnInit, OnChanges {
   @Input() current: number = 50;
   @Input() unit: string = 'cans';
   readonly status: typeof STATUS = STATUS;
-  private _lastCriticalPercentage = 0;
-  private _lastLowPercentage = 0;
-  private _lastCurrentPercentage = 0;
 
   currentStatus = STATUS.CRITICAL;
 
@@ -118,7 +115,6 @@ export class ArcComponent implements OnInit, OnChanges {
     }
     if (value > 100) value = 100;
     if (value < 0) value = 0;
-    this._lastCurrentPercentage = value;
     return value;
   }
 
@@ -129,7 +125,6 @@ export class ArcComponent implements OnInit, OnChanges {
     }
     if (value > 100) value = 100;
     if (value < 0) value = 0;
-    this._lastCriticalPercentage = value;
     return value;
   }
 
@@ -140,7 +135,6 @@ export class ArcComponent implements OnInit, OnChanges {
     }
     if (value > 100) value = 100;
     if (value < 0) value = 0;
-    this._lastLowPercentage = value;
     return value;
   }
 }
